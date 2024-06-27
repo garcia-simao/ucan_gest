@@ -4,13 +4,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Componentes</title>
+  <title>Gerar Relatório</title>
   <link href="assets/css/css2.css" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/tailwind.output.css" />
   <link rel="stylesheet" href="assets/vendors/sweetalert/sweetalert.css" />
   
   <script src="assets/js/alpine.min.js" defer></script>
   <script src="assets/js/init-alpine.js"></script>
+  <script src="./assets/js/script.js" defer></script>
 </head>
 
 
@@ -117,7 +118,7 @@
               <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                 <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
               </svg>
-              <span class="ml-4">Cadastrar area/ Cadastrar categoria</span>
+              <span class="ml-4">Gerar Relatório</span>
               <span class="absolute inset-y-0 left-0 w-1 bg-blue-600 rounded-tr-lg rounded-br-lg"
                 aria-hidden="true"></span>
             </a>
@@ -230,28 +231,32 @@
       <main class="h-full overflow-y-auto">
         <div class="container px-6 mx-auto grid">
           <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-            Componentes
+            Gerar Relatório
           </h2>
           <div class="px-4 py-3 mb-6 bg-white rounded-lg shadow-md dark:bg-gray-800">
             <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-2">
               <div class="model">
                 <!--Principal-->
+                <div>
                 <label class="block text-sm mb-2">
-                  <span class="text-gray-700 font-bold dark:text-gray-400">Categoria</span>
-                  <div class="relative text-gray-500 focus-within:text-purple-600">
-                    <select onchange="selectModel(this)"
-                      class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-blue-600 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
-                      <option>-------</option>
-                      <option>Opcao 1</option>
-                      <option>Opcao 2</option>
-                    </select>
-                    <button onclick="newModel(this)"
-                      class="absolute inset-y-0 right-0 px-4 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-r-md active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue">
-                      <svg class="w-5 h-5" aria-hidden="true" viewBox="0 0 22 22" fill="currentColor">
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22ZM12.75 9C12.75 8.58579 12.4142 8.25 12 8.25C11.5858 8.25 11.25 8.58579 11.25 9L11.25 11.25H9C8.58579 11.25 8.25 11.5858 8.25 12C8.25 12.4142 8.58579 12.75 9 12.75H11.25V15C11.25 15.4142 11.5858 15.75 12 15.75C12.4142 15.75 12.75 15.4142 12.75 15L12.75 12.75H15C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25H12.75V9Z" />
-                      </svg></button>
-                  </div>
+                  <span class="text-gray-700 font-bold dark:text-gray-400">Data do relatorio</span>
+                  <label class="block text-sm">
+                    <span class="text-gray-700 dark:text-gray-400"></span>
+                    <input type="date" style="appearance: none;" id="dataRelatorio"
+                      class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                      placeholder="" />
+                  </label>
+                  
+                </div>
+    
+                <div class="flex justify-end mb-6 mt-6 text-sm gap-6">
+                  <button class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-gray-300 border border-transparent rounded-lg active:bg-gray-100 hover:bg-gray-100 hover:text-gray-700 focus:outline-none focus:shadow-outline-blue">
+                    Limpar
+                  </button>
+                  <button onclick="GerarRelatorio()" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue">
+                      gerar relatório
+                    </button>
+                </div>
                 </label>
                 <!--Alteracoes-->
                 <div class="hidden flex items-center gap-16 p-3 bg-gray-50 rounded-lg shadow-md dark:bg-gray-800">
@@ -306,23 +311,7 @@
               </div>
               <div class="model">
                 <!--Principal-->
-                <label class="block text-sm mb-2">
-                  <span class="text-gray-700 font-bold dark:text-gray-400">Area</span>
-                  <div class="relative text-gray-500 focus-within:text-purple-600">
-                    <select onchange="selectModel(this)"
-                      class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-blue-600 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray">
-                      <option>-------</option>
-                      <option>Opcao 1</option>
-                      <option>Opcao 2</option>
-                    </select>
-                    <button onclick="newModel(this)"
-                      class="absolute inset-y-0 right-0 px-4 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-r-md active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue">
-                      <svg class="w-5 h-5" aria-hidden="true" viewBox="0 0 22 22" fill="currentColor">
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22ZM12.75 9C12.75 8.58579 12.4142 8.25 12 8.25C11.5858 8.25 11.25 8.58579 11.25 9L11.25 11.25H9C8.58579 11.25 8.25 11.5858 8.25 12C8.25 12.4142 8.58579 12.75 9 12.75H11.25V15C11.25 15.4142 11.5858 15.75 12 15.75C12.4142 15.75 12.75 15.4142 12.75 15L12.75 12.75H15C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25H12.75V9Z" />
-                      </svg></button>
-                  </div>
-                </label>
+                
                 <!--Alteracoes-->
                 <div class="hidden flex items-center gap-16 p-3 bg-gray-50 rounded-lg shadow-md dark:bg-gray-800">
                   <label class="block text-sm">

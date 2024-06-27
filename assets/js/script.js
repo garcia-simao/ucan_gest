@@ -422,6 +422,36 @@ function enviarDadosItem() {
     limparCamposItem();
 }
 
+function GerarRelatorio() {
+    const dataRelatorio = document.getElementById('dataRelatorio').value;
+    
+    // URL para a requisição GET
+    const url = `http://localhost:8000/gerar_pdf/${dataRelatorio}/`;
+
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao gerar o relatório');
+            }
+            return response.blob();
+        })
+        .then(blob => {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = `relatorio_${dataRelatorio}.pdf`;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            console.log('Relatório gerado com sucesso');
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+        });
+}
+
+
 function enviarDadosFuncionario() {
     const nome = document.getElementById('nome').value;
     const numeroBilhete = document.getElementById('bilhete').value;
