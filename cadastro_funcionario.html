@@ -10,6 +10,7 @@
   <script src="assets/js/alpine.min.js" defer></script>
   <script src="assets/js/init-alpine.js"></script>
   <script src="./assets/js/script.js" defer></script>
+  <script src="./assets/js/format.js" defer></script>
 </head>
 <body>
   <div class="flex h-screen bg-gray-50 dark:bg-gray-900" :class="{ 'overflow-hidden': 'isSideMenuOpen' }">
@@ -238,19 +239,19 @@
             <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-2">
               <label class="block text-sm">
                 <span class="text-gray-700 dark:text-gray-400">Nome</span>
-                <input id="nome"
+                <input id="nome" maxlength="25"
                   class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                   placeholder="Nome" />
               </label>
               <label class="block text-sm">
                 <span class="text-gray-700 dark:text-gray-400">Numero do Bilhete</span>
-                <input type="text" style="appearance: none;" id="bilhete"
+                <input type="text" style="appearance: none;" id="bilhete"  maxlength="12"
                   class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                   placeholder="Numero do bilhete" />
               </label>
               <label class="block text-sm">
                 <span class="text-gray-700 dark:text-gray-400">Função</span>
-                <input type="text" style="appearance: none;" id="funcao"
+                <input type="text" style="appearance: none;" id="funcao"  maxlength="15"
                   class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                   placeholder="Função" />
               </label>
@@ -271,7 +272,7 @@
               </label>
               <label class="block text-sm">
                 <span class="text-gray-700 dark:text-gray-400">Email</span>
-                <input type="email" style="appearance: none;" id="email"
+                <input type="email" style="appearance: none;" id="email" maxlength="25"
                   class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                   placeholder="Email" />
               </label>
@@ -283,7 +284,7 @@
               </label>
               
             </div>
-
+            <span id="preencherCampos" class="hidden text-red-700 dark:text-red-400 font-medium">Preencher todos os campos acima!</span>
             <div class="flex justify-end mb-6 mt-6 text-sm gap-6">
               <button onclick="limparCamposFuncionario()" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-gray-300 border border-transparent rounded-lg active:bg-gray-100 hover:bg-gray-100 hover:text-gray-700 focus:outline-none focus:shadow-outline-blue">
                 Limpar

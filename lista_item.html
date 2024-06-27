@@ -11,6 +11,7 @@
   <script src="assets/js/alpine.min.js" defer></script>
   <script src="./assets/js/init-alpine.js"></script>
   <script src="./assets/js/script.js" defer></script>
+  <script src="./assets/js/format.js" defer></script>
 </head>
 <body>
   <div class="flex h-screen bg-gray-50 dark:bg-gray-900" :class="{ 'overflow-hidden': 'isSideMenuOpen' }">
@@ -328,7 +329,7 @@
             <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-2">
               <label class="block text-sm">
                 <span class="text-gray-700 dark:text-gray-400">Nome</span>
-                <input
+                <input maxlength="25"
                   id="nome" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                   placeholder="Nome" />
               </label>
@@ -360,14 +361,14 @@
 
               <label class="block text-sm">
                 <span class="text-gray-700 dark:text-gray-400">Estado</span>
-                <input
+                <input maxlength="12"
                   id="estado" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                   placeholder="Nome" />
               </label>
 
               <label class="block text-sm">
                 <span class="text-gray-700 dark:text-gray-400">Tempo de Vida</span>
-                <input
+                <input maxlength="12"
                   id="tempo-vida" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                   placeholder="Nome" />
               </label>
@@ -381,10 +382,11 @@
                 placeholder="3523565752" />
             </label>
             <label class="block mt-4 text-sm">
-
+              <span id="preencherCampos" class="hidden text-red-700 dark:text-red-400 font-semibold">Preencher todos os campos acima!</span>
+           
             <div class="flex justify-end mb-6 mt-6 text-sm gap-6">
-              <button class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-gray-300 border border-transparent rounded-lg active:bg-gray-100 hover:bg-gray-100 hover:text-gray-700 focus:outline-none focus:shadow-outline-blue">
-                Limpar
+              <button onclick="cancelar(0)" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-gray-100 hover:bg-red-700 hover:text-gray-100 focus:outline-none focus:shadow-outline-blue">
+                Cancelar
               </button>
               <button onclick="funcaoInternaAtualizarItem()" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue">
                   Enviar

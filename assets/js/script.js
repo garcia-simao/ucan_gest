@@ -185,14 +185,13 @@ function editarItem(itemId) {
         
 }
 
-document.addEventListener('keydown', function (event) {
-    if (event.key === 'Escape' && isfunMenuOpen || isItemMenuOpen) {
-        isfunMenuOpen = false;
-        isItemMenuOpen = false;
-        document.getElementById('funMenu').classList.add('hidden');
-        document.getElementById('itemMenu').classList.add('hidden');
-    }
-})
+function cancelar(i) {
+    isfunMenuOpen = false;
+    isItemMenuOpen = false;
+    if(i)document.getElementById('funMenu').classList.add('hidden');
+    else document.getElementById('itemMenu').classList.add('hidden');
+
+}
 
 function limparCamposItem() {
     document.getElementById('nome').value = '';
@@ -395,7 +394,8 @@ function enviarDadosItem() {
     const estado = document.getElementById('estado').value;
     const imagem = document.getElementById('imagem').files[0];
 
-    const formData = new FormData();
+    if(verificarCamposItem()){
+        const formData = new FormData();
     formData.append('nome', nome);
     formData.append('data_compra', dataCompra);
     formData.append('categoria', categoria);
@@ -415,8 +415,10 @@ function enviarDadosItem() {
         return response.json();
     })
     .then(data => {
-        console.log('Dados enviados com sucesso:', data);
-        // Lógica adicional após o envio bem-sucedido
+            setTimeout(function () {
+              swal("Salvo!", "O item foi salvo com sucesso.", "success");
+            }, 2000);
+          
     })
     .catch(error => {
         console.error('Erro:', error);
@@ -424,6 +426,7 @@ function enviarDadosItem() {
     });
 
     limparCamposItem();
+}
 }
 
 function GerarRelatorio() {
@@ -466,7 +469,7 @@ function enviarDadosFuncionario() {
     const senha = document.getElementById('senha').value;
 
 
-
+    if(verificarCamposFuncionario()){
     const formData = new FormData();
     formData.append('nome', nome);
     formData.append('numero_bilhete', numeroBilhete);
@@ -487,8 +490,9 @@ function enviarDadosFuncionario() {
         return response.json();
     })
     .then(data => {
-        console.log('Dados enviados com sucesso:', data);
-        // Lógica adicional após o envio bem-sucedido
+        setTimeout(function () {
+            swal("Salvo!", "O funcionario foi cadastrado com sucesso.", "success");
+          }, 2000);
     })
     .catch(error => {
         console.error('Erro:', error);
@@ -496,6 +500,64 @@ function enviarDadosFuncionario() {
     });
 
     limparCamposFuncionario();
+}
+}
+
+
+function verificarCamposFuncionario() {
+    const campos = [
+        { id: 'nome'},
+        { id: 'bilhete'},
+        { id: 'funcao'},
+        { id: 'dataNascimento'},
+        { id: 'endereco'},
+        { id: 'email'},
+        { id: 'senha'}
+    ];
+
+    let formValido = true;
+
+    campos.forEach(campo => {
+        const elemento = document.getElementById(campo.id);
+        if (!elemento.value) {
+            elemento.classList.add('border-red-600');
+            document.getElementById('preencherCampos').classList.remove("hidden");
+            formValido = false;
+        } else {
+            elemento.classList.remove('border-red-600');
+            document.getElementById('preencherCampos').classList.add("hidden");
+        }
+    });
+
+    return formValido;
+}
+
+function verificarCamposItem() {
+    const campos = [
+        { id: 'data'},
+        { id: 'categoria'},
+        { id: 'area'},
+        { id: 'tempo-vida'},
+        { id: 'estado'},
+        { id: 'imagem'}
+    ];
+
+    let formValido = true;
+
+    campos.forEach(campo => {
+        const elemento = document.getElementById(campo.id);
+        const valor = campo.id === 'imagem' ? elemento.files[0] : elemento.value;
+        if (!valor) {
+            elemento.classList.add('border-red-600','shadow-outline-red');
+            document.getElementById('preencherCampos').classList.remove("hidden");
+            formValido = false;
+        } else {
+            elemento.classList.remove('border-red-600','shadow-outline-red');
+            document.getElementById('preencherCampos').classList.add("hidden");
+        }
+    });
+
+    return formValido;
 }
 
 function carregarDadosItem() {
