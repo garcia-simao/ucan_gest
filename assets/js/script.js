@@ -202,6 +202,10 @@ function limparCamposItem() {
     document.getElementById('imagem').value = '';
 }
 
+function limparCamposGerarRelatorio() {
+    document.getElementById('dataRelatorio').value = '';
+}
+
 function limparCamposFuncionario() {
     document.getElementById('nome').value = '';
     document.getElementById('bilhete').value = '';
