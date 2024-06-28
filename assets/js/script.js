@@ -739,3 +739,42 @@ function carregarDadosFuncionario() {
             // Tratamento de erro, se necessário
         });
 }
+
+
+function login(){
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Impede o envio padrão do formulário
+  
+        const email = document.getElementById('email').value;
+        const senha = document.getElementById('senha').value;
+  
+        const data = {
+          email: email,
+          senha: senha
+        };
+  
+        fetch('http://localhost:8000/funcionario/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Credenciais inválidas');
+          }
+          return response.json();
+        })
+        .then(data => {
+          // Lógica após o login bem-sucedido
+          console.log('Login bem-sucedido:', data);
+          // Redirecionar para outra página ou mostrar uma mensagem de sucesso
+        })
+        .catch(error => {
+          console.error('Erro no login:', error);
+          // Mostrar mensagem de erro para o usuário
+          alert('Credenciais inválidas. Tente novamente.');
+        });
+      });
+}
