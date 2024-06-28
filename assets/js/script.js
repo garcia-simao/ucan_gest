@@ -465,6 +465,7 @@ function enviarDadosFuncionario() {
     const endereco = document.getElementById('endereco').value;
     const email = document.getElementById('email').value;
     const senha = document.getElementById('senha').value;
+    const admin = document.getElementById('admin').value;
 
 
 
@@ -476,6 +477,7 @@ function enviarDadosFuncionario() {
     formData.append('endereco', endereco);
     formData.append('email', email);
     formData.append('senha', senha);
+    formData.append('admin', admin);
 
     fetch('http://localhost:8000/funcionario/', {
         method: 'POST',
@@ -708,6 +710,15 @@ function carregarDadosFuncionario() {
                 senhaSpan.textContent = item.senha;
                 senhaCell.appendChild(senhaSpan);
                 row.appendChild(senhaCell);
+
+                 // Coluna do admin
+                 const adminCell = document.createElement('td');
+                 adminCell.classList.add('px-4', 'py-3', 'text-sm');
+                 const adminSpan = document.createElement('span');
+                 adminSpan.classList.add('px-2', 'py-1', 'font-semibold', 'leading-tight', 'text-green-700', 'bg-green-100', 'rounded-full', 'dark:bg-green-700', 'dark:text-green-100');
+                 adminSpan.textContent = item.admin;
+                 adminCell.appendChild(adminSpan);
+                 row.appendChild(adminCell);
 
                 // Coluna das ações (botões)
                 const acoesCell = document.createElement('td');

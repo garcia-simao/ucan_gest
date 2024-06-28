@@ -8,6 +8,7 @@ class Funcionario(models.Model):
     funcao=models.CharField(max_length=100, blank=True)
     senha=models.CharField(max_length=100, blank=True, unique=True)
     endereco=models.CharField(max_length=100, blank=True)
+    admin=models.BooleanField(default=False)
     data_nascimento=models.DateField()
     data_registro=models.DateField(auto_now_add=True)
 

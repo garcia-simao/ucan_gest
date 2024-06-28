@@ -11,7 +11,7 @@ from .models import Item
 class FuncionarioSerializers(serializers.ModelSerializer):
     class Meta:
         model = Funcionario
-        fields = ['id', 'nome', 'email', 'numero_bilhete','funcao','senha', 'endereco', 'data_nascimento','data_registro'] 
+        fields = ['id', 'nome', 'email', 'numero_bilhete','funcao','senha', 'endereco', 'admin','data_nascimento','data_registro'] 
 
 class CategoriaItemSerializers(serializers.ModelSerializer):
     class Meta:
