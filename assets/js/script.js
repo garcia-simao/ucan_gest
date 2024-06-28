@@ -581,6 +581,15 @@ function carregarDadosItem() {
                 tempoCell.appendChild(tempoSpan);
                 row.appendChild(tempoCell);
 
+                // Coluna da data de registro
+                const dataRCell = document.createElement('td');
+                dataRCell.classList.add('px-4', 'py-3', 'text-sm');
+                const dataRSpan = document.createElement('span');
+                dataRSpan.classList.add('px-2', 'py-1', 'font-semibold', 'leading-tight', 'text-green-700', 'bg-green-100', 'rounded-full', 'dark:bg-green-700', 'dark:text-green-100');
+                dataRSpan.textContent = item.data_registro;
+                dataRCell.appendChild(dataRSpan);
+                row.appendChild(dataRCell);
+
                 // Coluna das ações (botões)
                 const acoesCell = document.createElement('td');
                 acoesCell.classList.add('px-4', 'py-3');
