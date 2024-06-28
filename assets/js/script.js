@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     carregarCategorias();
     carregarAreas();
-    
+
     carregarDadosItem();
     carregarDadosFuncionario();
 
@@ -43,60 +43,60 @@ function editarFuncionario(itemId) {
         .catch(error => {
             console.error('Erro:', error);
         });
-        
-        function clicarActualizarFuncionario(){
-            const nome = document.getElementById('nome').value;
-            const dataNascimento = document.getElementById('dataNascimento').value;
-            const endereco = document.getElementById('endereco').value;
-            const email = document.getElementById('email').value;
-            const senha = document.getElementById('senha').value;
-            const funcao = document.getElementById('funcao').value;
-            const bilhete = document.getElementById('bilhete').value;
-        
-                console.log('id:${itemId}')
-                const dadosAtualizados = {
-                    nome: nome,
-                    data_nascimento: dataNascimento,
-                    endereco: endereco,
-                    email: email,
-                    senha: senha,
-                    funcao: funcao,
-                    numero_bilhete: bilhete
-                };
-            
-                fetch(`http://localhost:8000/funcionario/${itemId}/`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(dadosAtualizados)
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Erro ao atualizar o funcionário');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Funcionário atualizado com sucesso:', data);
-                    document.getElementById('funMenu').classList.add("hidden");
-                })
-                .then(() => {
-                    swal({
-                        title: "Atualizado!",
-                        text: "O funcionario foi atualizado com sucesso.",
-                        type: "success"
-                    }, function() {
-                        // Recarregar a página após a exclusão bem-sucedida
-                        location.reload();
-                    });
-                })
-                .catch(error => {
-                    //console.error('Erro:', error);
+
+    function clicarActualizarFuncionario() {
+        const nome = document.getElementById('nome').value;
+        const dataNascimento = document.getElementById('dataNascimento').value;
+        const endereco = document.getElementById('endereco').value;
+        const email = document.getElementById('email').value;
+        const senha = document.getElementById('senha').value;
+        const funcao = document.getElementById('funcao').value;
+        const bilhete = document.getElementById('bilhete').value;
+
+        console.log('id:${itemId}')
+        const dadosAtualizados = {
+            nome: nome,
+            data_nascimento: dataNascimento,
+            endereco: endereco,
+            email: email,
+            senha: senha,
+            funcao: funcao,
+            numero_bilhete: bilhete
+        };
+
+        fetch(`http://localhost:8000/funcionario/${itemId}/`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dadosAtualizados)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao atualizar o funcionário');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Funcionário atualizado com sucesso:', data);
+                document.getElementById('funMenu').classList.add("hidden");
+            })
+            .then(() => {
+                swal({
+                    title: "Atualizado!",
+                    text: "O funcionario foi atualizado com sucesso.",
+                    type: "success"
+                }, function () {
+                    // Recarregar a página após a exclusão bem-sucedida
+                    location.reload();
                 });
-        }
-        window.funcaoInternaAtualizarFuncionario = clicarActualizarFuncionario;
-        
+            })
+            .catch(error => {
+                //console.error('Erro:', error);
+            });
+    }
+    window.funcaoInternaAtualizarFuncionario = clicarActualizarFuncionario;
+
 }
 
 
@@ -124,71 +124,71 @@ function editarItem(itemId) {
             document.getElementById('estado').value = data.estado;
             document.getElementById('tempo-vida').value = data.tempo_de_vida;
             document.getElementById('imagem').files[0] = data.imagem;
-            
+
         })
         .catch(error => {
-           // console.error('Erro:', error);
+            // console.error('Erro:', error);
         });
-        
-        function clicarActualizarItem(){
-            const nome = document.getElementById('nome').value;
-            const data = document.getElementById('data').value;
-            const categoria = document.getElementById('categoria').value;
-            const area = document.getElementById('area').value;
-            const estado = document.getElementById('estado').value;
-            const tempoVida = document.getElementById('tempo-vida').value;
-            const imagem = document.getElementById('imagem').files[0];
-            
-        
-            console.log('id:${itemId}')
-            const dadosAtualizados = new FormData();
-            dadosAtualizados.append('nome', nome);
-            dadosAtualizados.append('data_compra', data);
-            dadosAtualizados.append('categoria', categoria);
-            dadosAtualizados.append('area', area);
-            dadosAtualizados.append('estado', estado);
-            dadosAtualizados.append('tempo_de_vida', tempoVida);
-            if (imagem) {
-                dadosAtualizados.append('imagem', imagem);
-            }
-            
-                fetch(`http://localhost:8000/itens/${itemId}/`, {
-                    method: 'PUT',
-                   
-                    body: dadosAtualizados
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Erro ao atualizar o item');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('item atualizado com sucesso:', data);
-                    document.getElementById('itemMenu').classList.add("hidden");
-                })
-                .then(() => {
-                    swal({
-                        title: "Atualizado!",
-                        text: "O item foi atualizado com sucesso.",
-                        type: "success"
-                    }, function() {
-                        // Recarregar a página após a exclusão bem-sucedida
-                        location.reload();
-                    });
-                })
-                .catch(error => {
-                    //console.error('Erro:', error);
-                });
+
+    function clicarActualizarItem() {
+        const nome = document.getElementById('nome').value;
+        const data = document.getElementById('data').value;
+        const categoria = document.getElementById('categoria').value;
+        const area = document.getElementById('area').value;
+        const estado = document.getElementById('estado').value;
+        const tempoVida = document.getElementById('tempo-vida').value;
+        const imagem = document.getElementById('imagem').files[0];
+
+
+        console.log('id:${itemId}')
+        const dadosAtualizados = new FormData();
+        dadosAtualizados.append('nome', nome);
+        dadosAtualizados.append('data_compra', data);
+        dadosAtualizados.append('categoria', categoria);
+        dadosAtualizados.append('area', area);
+        dadosAtualizados.append('estado', estado);
+        dadosAtualizados.append('tempo_de_vida', tempoVida);
+        if (imagem) {
+            dadosAtualizados.append('imagem', imagem);
         }
-        window.funcaoInternaAtualizarItem = clicarActualizarItem;
-        
+
+        fetch(`http://localhost:8000/itens/${itemId}/`, {
+            method: 'PUT',
+
+            body: dadosAtualizados
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao atualizar o item');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('item atualizado com sucesso:', data);
+                document.getElementById('itemMenu').classList.add("hidden");
+            })
+            .then(() => {
+                swal({
+                    title: "Atualizado!",
+                    text: "O item foi atualizado com sucesso.",
+                    type: "success"
+                }, function () {
+                    // Recarregar a página após a exclusão bem-sucedida
+                    location.reload();
+                });
+            })
+            .catch(error => {
+                //console.error('Erro:', error);
+            });
+    }
+    window.funcaoInternaAtualizarItem = clicarActualizarItem;
+
 }
 
 function cancelar(i) {
     isfunMenuOpen = false;
     isItemMenuOpen = false;
-    if(i)document.getElementById('funMenu').classList.add('hidden');
+    if (i) document.getElementById('funMenu').classList.add('hidden');
     else document.getElementById('itemMenu').classList.add('hidden');
 
 }
@@ -216,80 +216,80 @@ function limparCamposFuncionario() {
 }
 
 function excluirFuncionario(itemId) {
-    console.log("id do funcionario a eliminar:",itemId)
+    console.log("id do funcionario a eliminar:", itemId)
     swal({
-      title: "Tem certeza?",
-      text: "Esse item não poderá ser recuperado após a exclusão.",
-      type: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#e02424",
-      hoverColor: "#000000",
-      confirmButtonText: "Sim, exclua agora!",
-      closeOnConfirm: false,
-      showLoaderOnConfirm: true
+        title: "Tem certeza?",
+        text: "Esse item não poderá ser recuperado após a exclusão.",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#e02424",
+        hoverColor: "#000000",
+        confirmButtonText: "Sim, exclua agora!",
+        closeOnConfirm: false,
+        showLoaderOnConfirm: true
     }, function () {
         fetch(`http://localhost:8000/funcionario/${itemId}/`, {
             method: 'DELETE',
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Erro ao excluir o item');
-            }
-            return response.text();
-        })
-        .then(() => {
-            swal({
-                title: "Excluído!",
-                text: "O item foi excluído com sucesso.",
-                type: "success"
-            }, function() {
-                // Recarregar a página após a exclusão bem-sucedida
-                location.reload();
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao excluir o item');
+                }
+                return response.text();
+            })
+            .then(() => {
+                swal({
+                    title: "Excluído!",
+                    text: "O item foi excluído com sucesso.",
+                    type: "success"
+                }, function () {
+                    // Recarregar a página após a exclusão bem-sucedida
+                    location.reload();
+                });
+            })
+            .catch(error => {
+                //swal("Erro", "Ocorreu um erro ao excluir o item: " + error, "error");
             });
-        })
-        .catch(error => {
-            //swal("Erro", "Ocorreu um erro ao excluir o item: " + error, "error");
-        });
     });
-  }
-  
-  function excluirItem(itemId) {
-    console.log("id do funcionario a eliminar:",itemId)
+}
+
+function excluirItem(itemId) {
+    console.log("id do funcionario a eliminar:", itemId)
     swal({
-      title: "Tem certeza?",
-      text: "Esse item não poderá ser recuperado após a exclusão.",
-      type: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#e02424",
-      hoverColor: "#000000",
-      confirmButtonText: "Sim, exclua agora!",
-      closeOnConfirm: false,
-      showLoaderOnConfirm: true
+        title: "Tem certeza?",
+        text: "Esse item não poderá ser recuperado após a exclusão.",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#e02424",
+        hoverColor: "#000000",
+        confirmButtonText: "Sim, exclua agora!",
+        closeOnConfirm: false,
+        showLoaderOnConfirm: true
     }, function () {
         fetch(`http://localhost:8000/itens/${itemId}/`, {
             method: 'DELETE',
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Erro ao excluir o item');
-            }
-            return response.text();
-        })
-        .then(() => {
-            swal({
-                title: "Excluído!",
-                text: "O item foi excluído com sucesso.",
-                type: "success"
-            }, function() {
-                // Recarregar a página após a exclusão bem-sucedida
-                location.reload();
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao excluir o item');
+                }
+                return response.text();
+            })
+            .then(() => {
+                swal({
+                    title: "Excluído!",
+                    text: "O item foi excluído com sucesso.",
+                    type: "success"
+                }, function () {
+                    // Recarregar a página após a exclusão bem-sucedida
+                    location.reload();
+                });
+            })
+            .catch(error => {
+                //swal("Erro", "Ocorreu um erro ao excluir o item: " + error, "error");
             });
-        })
-        .catch(error => {
-            //swal("Erro", "Ocorreu um erro ao excluir o item: " + error, "error");
-        });
     });
-  }  
+}
 
 async function carregarCategorias() {
     try {
@@ -309,7 +309,7 @@ async function carregarCategorias() {
             select.appendChild(option);
         });
     } catch (error) {
-       // console.error('Erro:', error);
+        // console.error('Erro:', error);
         // Trate o erro conforme necessário
     }
 }
@@ -324,10 +324,10 @@ async function carregarTotalFuncionarios() {
         const totalFuncionariosElement = document.getElementById('total-funcionarios');
         totalFuncionariosElement.textContent = `${data.total_funcionario}`;
     } catch (error) {
-       // console.error('Erro:', error);
+        // console.error('Erro:', error);
         // Tratamento de erro, se necessário
     }
-        
+
 }
 
 async function carregarTotalAreas() {
@@ -340,10 +340,10 @@ async function carregarTotalAreas() {
         const totalFuncionariosElement = document.getElementById('total-area');
         totalFuncionariosElement.textContent = `${data.total_area}`;
     } catch (error) {
-       // console.error('Erro:', error);
+        // console.error('Erro:', error);
         // Tratamento de erro, se necessário
     }
-        
+
 }
 
 async function carregarTotalItens() {
@@ -356,10 +356,10 @@ async function carregarTotalItens() {
         const totalFuncionariosElement = document.getElementById('total-item');
         totalFuncionariosElement.textContent = `${data.total_item}`;
     } catch (error) {
-       // console.error('Erro:', error);
+        // console.error('Erro:', error);
         // Tratamento de erro, se necessário
     }
-        
+
 }
 
 async function carregarAreas() {
@@ -394,44 +394,44 @@ function enviarDadosItem() {
     const estado = document.getElementById('estado').value;
     const imagem = document.getElementById('imagem').files[0];
 
-    if(verificarCamposItem()){
+    if (verificarCamposItem()) {
         const formData = new FormData();
-    formData.append('nome', nome);
-    formData.append('data_compra', dataCompra);
-    formData.append('categoria', categoria);
-    formData.append('area', area);
-    formData.append('imagem', imagem);
-    formData.append('estado', estado);
-    formData.append('tempo_de_vida', tempoVida);
+        formData.append('nome', nome);
+        formData.append('data_compra', dataCompra);
+        formData.append('categoria', categoria);
+        formData.append('area', area);
+        formData.append('imagem', imagem);
+        formData.append('estado', estado);
+        formData.append('tempo_de_vida', tempoVida);
 
-    fetch('http://localhost:8000/itens/', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Erro ao enviar os dados');
-        }
-        return response.json();
-    })
-    .then(data => {
-            setTimeout(function () {
-              swal("Salvo!", "O item foi salvo com sucesso.", "success");
-            }, 2000);
-          
-    })
-    .catch(error => {
-        console.error('Erro:', error);
-        // Tratamento de erro, se necessário
-    });
+        fetch('http://localhost:8000/itens/', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao enviar os dados');
+                }
+                return response.json();
+            })
+            .then(data => {
+                setTimeout(function () {
+                    swal("Salvo!", "O item foi salvo com sucesso.", "success");
+                }, 2000);
 
-    limparCamposItem();
-}
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                // Tratamento de erro, se necessário
+            });
+
+        limparCamposItem();
+    }
 }
 
 function GerarRelatorio() {
     const dataRelatorio = document.getElementById('dataRelatorio').value;
-    
+
     // URL para a requisição GET
     const url = `http://localhost:8000/gerar_pdf/${dataRelatorio}/`;
 
@@ -469,50 +469,50 @@ function enviarDadosFuncionario() {
     const senha = document.getElementById('senha').value;
 
 
-    if(verificarCamposFuncionario()){
-    const formData = new FormData();
-    formData.append('nome', nome);
-    formData.append('numero_bilhete', numeroBilhete);
-    formData.append('funcao', funcao);
-    formData.append('data_nascimento', dataNascimento);
-    formData.append('endereco', endereco);
-    formData.append('email', email);
-    formData.append('senha', senha);
+    if (verificarCamposFuncionario()) {
+        const formData = new FormData();
+        formData.append('nome', nome);
+        formData.append('numero_bilhete', numeroBilhete);
+        formData.append('funcao', funcao);
+        formData.append('data_nascimento', dataNascimento);
+        formData.append('endereco', endereco);
+        formData.append('email', email);
+        formData.append('senha', senha);
 
-    fetch('http://localhost:8000/funcionario/', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Erro ao enviar os dados');
-        }
-        return response.json();
-    })
-    .then(data => {
-        setTimeout(function () {
-            swal("Salvo!", "O funcionario foi cadastrado com sucesso.", "success");
-          }, 2000);
-    })
-    .catch(error => {
-        console.error('Erro:', error);
-        // Tratamento de erro, se necessário
-    });
+        fetch('http://localhost:8000/funcionario/', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao enviar os dados');
+                }
+                return response.json();
+            })
+            .then(data => {
+                setTimeout(function () {
+                    swal("Salvo!", "O funcionario foi cadastrado com sucesso.", "success");
+                }, 2000);
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                // Tratamento de erro, se necessário
+            });
 
-    limparCamposFuncionario();
-}
+        limparCamposFuncionario();
+    }
 }
 
 
 function verificarCamposFuncionario() {
     const campos = [
-        { id: 'nome'},
-        { id: 'bilhete'},
-        { id: 'funcao'},
-        { id: 'dataNascimento'},
-        { id: 'endereco'},
-        { id: 'email'},
-        { id: 'senha'}
+        { id: 'nome' },
+        { id: 'bilhete' },
+        { id: 'funcao' },
+        { id: 'dataNascimento' },
+        { id: 'endereco' },
+        { id: 'email' },
+        { id: 'senha' }
     ];
 
     let formValido = true;
@@ -534,12 +534,12 @@ function verificarCamposFuncionario() {
 
 function verificarCamposItem() {
     const campos = [
-        { id: 'data'},
-        { id: 'categoria'},
-        { id: 'area'},
-        { id: 'tempo-vida'},
-        { id: 'estado'},
-        { id: 'imagem'}
+        { id: 'data' },
+        { id: 'categoria' },
+        { id: 'area' },
+        { id: 'tempo-vida' },
+        { id: 'estado' },
+        { id: 'imagem' }
     ];
 
     let formValido = true;
@@ -548,11 +548,11 @@ function verificarCamposItem() {
         const elemento = document.getElementById(campo.id);
         const valor = campo.id === 'imagem' ? elemento.files[0] : elemento.value;
         if (!valor) {
-            elemento.classList.add('border-red-600','shadow-outline-red');
+            elemento.classList.add('border-red-600', 'shadow-outline-red');
             document.getElementById('preencherCampos').classList.remove("hidden");
             formValido = false;
         } else {
-            elemento.classList.remove('border-red-600','shadow-outline-red');
+            elemento.classList.remove('border-red-600', 'shadow-outline-red');
             document.getElementById('preencherCampos').classList.add("hidden");
         }
     });
@@ -700,7 +700,7 @@ function carregarDadosFuncionario() {
             data.forEach(item => {
                 const row = document.createElement('tr');
 
-                
+
                 // Coluna do nome
                 const nomeCell = document.createElement('td');
                 nomeCell.classList.add('px-4', 'py-3', 'text-sm', 'font-semibold');
@@ -760,7 +760,7 @@ function carregarDadosFuncionario() {
                 senhaSpan.textContent = item.senha;
                 senhaCell.appendChild(senhaSpan);
                 row.appendChild(senhaCell);
-                
+
                 // Coluna das ações (botões)
                 const acoesCell = document.createElement('td');
                 acoesCell.classList.add('px-4', 'py-3');
