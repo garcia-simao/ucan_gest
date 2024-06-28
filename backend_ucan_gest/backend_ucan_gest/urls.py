@@ -29,6 +29,7 @@ from core.views import ItemTotalViewSet
 from core.views import FuncionarioTotalViewSet
 from core.views import AreaItemTotalViewSet
 from core.views import gerar_pdf
+from core.views import FuncionarioLogin
 
 router = routers.DefaultRouter()
 router.register(r'funcionario', FuncionarioViewSet, basename='funcionario1')
@@ -44,6 +45,8 @@ urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
     path('gerar_pdf/<str:data>/', gerar_pdf, name='gerar_pdf'),
+    path('login/', FuncionarioLogin, name='verificar_login_funcionario'),
+
     
 ]
 

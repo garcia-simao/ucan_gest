@@ -2,6 +2,10 @@ from django.http import HttpResponse
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from datetime import datetime
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import authenticate
+from django.contrib.auth.hashers import check_password
 
 from django.shortcuts import render
 from rest_framework import viewsets
@@ -121,3 +125,26 @@ def gerar_pdf(request, data):
     p.save()
 
     return response 
+
+from .serializers import LoginSerializer 
+from rest_framework.views import APIView
+from rest_framework import status
+from rest_framework.decorators import api_view
+
+@api_view(['POST'])
+def FuncionarioLogin(request):
+    if request.method == 'POST':
+        email = request.data.get('email')
+        senha = request.data.get('senha')
+
+        try:
+            # Obtém o primeiro funcionário com base no email fornecido
+            funcionario = Funcionario.objects.get(email=email)
+
+            if funcionario and check_password(senha, funcionario.senha):
+                return Response({'message': 'Login bem-sucedido'}, status=200)
+            else:
+                return Response({'error': 'Credenciais inválidas'}, status=401)
+
+        except Funcionario.DoesNotExist:
+            return Response({'error': 'Credenciais inválidas'}, status=401)

@@ -38,3 +38,7 @@ class ItemSerializers(serializers.ModelSerializer):
     
     def get_area_nome(self, obj):
         return obj.area.nome
+
+class LoginSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    senha = serializers.CharField()

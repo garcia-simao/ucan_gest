@@ -742,39 +742,34 @@ function carregarDadosFuncionario() {
 
 
 function login(){
-    document.getElementById('loginForm').addEventListener('submit', function(event) {
+    document.getElementById('login').addEventListener('submit', function(event) {
         event.preventDefault(); // Impede o envio padrão do formulário
-  
+    
         const email = document.getElementById('email').value;
         const senha = document.getElementById('senha').value;
-  
-        const data = {
-          email: email,
-          senha: senha
-        };
-  
-        fetch('http://localhost:8000/funcionario/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
+    
+        fetch(`http://localhost:8000/login/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, senha })
         })
         .then(response => {
-          if (!response.ok) {
-            throw new Error('Credenciais inválidas');
-          }
-          return response.json();
+            if (!response.ok) {
+                throw new Error('Credenciais inválidas');
+            }
+            return response.json();
         })
         .then(data => {
-          // Lógica após o login bem-sucedido
-          console.log('Login bem-sucedido:', data);
-          // Redirecionar para outra página ou mostrar uma mensagem de sucesso
+            console.log('Login bem-sucedido:', data);
+            // Redirecionar para outra página ou mostrar uma mensagem de sucesso
+            window.location.href = 'file:///home/garcia_simao/Documentos/3%20%C2%AA%20ano/2%C2%BA%20semestre/Engenharia%20de%20Software%20I/gest%C3%A3o%20de%20patrimonio/ucan_gest/index.html';
         })
         .catch(error => {
-          console.error('Erro no login:', error);
-          // Mostrar mensagem de erro para o usuário
-          alert('Credenciais inválidas. Tente novamente.');
+            console.error('Erro no login:', error);
+            alert('Credenciais inválidas. Tente novamente.');
         });
-      });
+    });
+    
 }
