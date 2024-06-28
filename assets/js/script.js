@@ -394,6 +394,7 @@ function enviarDadosItem() {
     const estado = document.getElementById('estado').value;
     const imagem = document.getElementById('imagem').files[0];
 
+    if (verificarCamposItem()) {   
     const formData = new FormData();
     formData.append('nome', nome);
     formData.append('data_compra', dataCompra);
@@ -427,7 +428,7 @@ function enviarDadosItem() {
 
         limparCamposItem();
     }
-
+}
 
 
 function GerarRelatorio() {
@@ -471,7 +472,7 @@ function enviarDadosFuncionario() {
     const admin = document.getElementById('admin').value;
 
 
-
+    if (verificarCamposFuncionario()) {
     const formData = new FormData();
     formData.append('nome', nome);
     formData.append('numero_bilhete', numeroBilhete);
@@ -505,6 +506,7 @@ function enviarDadosFuncionario() {
     });
 
     limparCamposFuncionario();
+    }
 }
 
 function carregarDadosItem() {
@@ -829,3 +831,60 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
+
+
+  function verificarCamposFuncionario() {
+    const campos = [
+        { id: 'nome' },
+        { id: 'bilhete' },
+        { id: 'funcao' },
+        { id: 'dataNascimento' },
+        { id: 'endereco' },
+        { id: 'email' },
+        { id: 'senha' }
+    ];
+
+    let formValido = true;
+
+    campos.forEach(campo => {
+        const elemento = document.getElementById(campo.id);
+        if (!elemento.value) {
+            elemento.classList.add('border-red-600');
+            document.getElementById('preencherCampos').classList.remove("hidden");
+            formValido = false;
+        } else {
+            elemento.classList.remove('border-red-600');
+            document.getElementById('preencherCampos').classList.add("hidden");
+        }
+    });
+
+    return formValido;
+}
+
+function verificarCamposItem() {
+    const campos = [
+        { id: 'data' },
+        { id: 'categoria' },
+        { id: 'area' },
+        { id: 'tempo-vida' },
+        { id: 'estado' },
+        { id: 'imagem' }
+    ];
+
+    let formValido = true;
+
+    campos.forEach(campo => {
+        const elemento = document.getElementById(campo.id);
+        const valor = campo.id === 'imagem' ? elemento.files[0] : elemento.value;
+        if (!valor) {
+            elemento.classList.add('border-red-600', 'shadow-outline-red');
+            document.getElementById('preencherCampos').classList.remove("hidden");
+            formValido = false;
+        } else {
+            elemento.classList.remove('border-red-600', 'shadow-outline-red');
+            document.getElementById('preencherCampos').classList.add("hidden");
+        }
+    });
+
+    return formValido;
+}
