@@ -773,3 +773,33 @@ function login(){
     });
     
 }
+
+
+    //pesquisa pelo nome do item
+    document.addEventListener('DOMContentLoaded', function () {
+    const searchInput = document.getElementById('search');
+    const tableBody = document.getElementById('corpo-tabela');
+
+    searchInput.addEventListener('keyup', function () {
+      const searchValue = searchInput.value.toLowerCase();
+      const rows = tableBody.getElementsByTagName('tr');
+
+      for (let i = 0; i < rows.length; i++) {
+        const cells = rows[i].getElementsByTagName('td');
+        let found = false;
+
+        for (let j = 0; j < cells.length; j++) {
+          if (cells[j].innerText.toLowerCase().includes(searchValue)) {
+            found = true;
+            break;
+          }
+        }
+
+        if (found) {
+          rows[i].style.display = '';
+        } else {
+          rows[i].style.display = 'none';
+        }
+      }
+    });
+  });
