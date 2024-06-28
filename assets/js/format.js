@@ -31,11 +31,7 @@ camposComLetras.forEach(campo => {
 
 if (email) {
   email.addEventListener('input', function () {
-<<<<<<< HEAD
     email.value = email.value.replace(/[^a-zA-Z0-9@.]/g, '');
-=======
-    email.value = email.value.replace(/[^a-zA-Z0-9@]/g, '');
->>>>>>> d736695 (dalva commit)
     email.value = email.value.replace(/\s{2,}/g, ' '); 
     email.value = email.value.replace(/^\s+/g, ''); 
   });

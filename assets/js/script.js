@@ -424,8 +424,8 @@ function enviarDadosItem() {
 
         limparCamposItem();
     }
-}
-}
+
+
 
 function GerarRelatorio() {
     const dataRelatorio = document.getElementById('dataRelatorio').value;
