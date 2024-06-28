@@ -416,6 +416,9 @@ function enviarDadosItem() {
     .then(data => {
         console.log('Dados enviados com sucesso:', data);
         // Lógica adicional após o envio bem-sucedido
+        setTimeout(function () {
+            swal("Salvo!", "O item foi cadastrado com sucesso.", "success");
+        }, 1000);
     })
     .catch(error => {
         console.error('Erro:', error);
@@ -492,6 +495,9 @@ function enviarDadosFuncionario() {
     .then(data => {
         console.log('Dados enviados com sucesso:', data);
         // Lógica adicional após o envio bem-sucedido
+        setTimeout(function () {
+            swal("Salvo!", "O funcionario foi cadastrado com sucesso.", "success");
+        }, 1000);
     })
     .catch(error => {
         console.error('Erro:', error);
@@ -795,8 +801,8 @@ function login(){
 }
 
 
-    //pesquisa pelo nome do item
-    document.addEventListener('DOMContentLoaded', function () {
+//pesquisa pelo nome do item
+document.addEventListener('DOMContentLoaded', function () {
     const searchInput = document.getElementById('search');
     const tableBody = document.getElementById('corpo-tabela');
 

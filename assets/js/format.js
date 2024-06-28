@@ -4,9 +4,10 @@ const funcao = document.getElementById('funcao');
 const tempoVida = document.getElementById('tempo-vida');
 const estado = document.getElementById('estado');
 const email = document.getElementById('email');
+const admin = document.getElementById('admin');
 
-const camposComMaxLength = [nome, bilhete, funcao, email, tempoVida, estado];
-const camposComLetras = [nome, funcao, estado];
+const camposComMaxLength = [nome, bilhete, funcao, email, tempoVida, estado, admin];
+const camposComLetras = [nome, funcao, estado, admin];
 const camposComNumerosELetras = [bilhete, tempoVida];
 
 camposComMaxLength.forEach(campo => {
