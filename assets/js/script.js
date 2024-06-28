@@ -394,39 +394,37 @@ function enviarDadosItem() {
     const estado = document.getElementById('estado').value;
     const imagem = document.getElementById('imagem').files[0];
 
-    if (verificarCamposItem()) {
-        const formData = new FormData();
-        formData.append('nome', nome);
-        formData.append('data_compra', dataCompra);
-        formData.append('categoria', categoria);
-        formData.append('area', area);
-        formData.append('imagem', imagem);
-        formData.append('estado', estado);
-        formData.append('tempo_de_vida', tempoVida);
+    const formData = new FormData();
+    formData.append('nome', nome);
+    formData.append('data_compra', dataCompra);
+    formData.append('categoria', categoria);
+    formData.append('area', area);
+    formData.append('imagem', imagem);
+    formData.append('estado', estado);
+    formData.append('tempo_de_vida', tempoVida);
 
-        fetch('http://localhost:8000/itens/', {
-            method: 'POST',
-            body: formData
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao enviar os dados');
-                }
-                return response.json();
-            })
-            .then(data => {
-                setTimeout(function () {
-                    swal("Salvo!", "O item foi salvo com sucesso.", "success");
-                }, 2000);
-
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-                // Tratamento de erro, se necessário
-            });
+    fetch('http://localhost:8000/itens/', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro ao enviar os dados');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Dados enviados com sucesso:', data);
+        // Lógica adicional após o envio bem-sucedido
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+        // Tratamento de erro, se necessário
+    });
 
         limparCamposItem();
     }
+}
 }
 
 function GerarRelatorio() {
@@ -469,95 +467,36 @@ function enviarDadosFuncionario() {
     const senha = document.getElementById('senha').value;
 
 
-    if (verificarCamposFuncionario()) {
-        const formData = new FormData();
-        formData.append('nome', nome);
-        formData.append('numero_bilhete', numeroBilhete);
-        formData.append('funcao', funcao);
-        formData.append('data_nascimento', dataNascimento);
-        formData.append('endereco', endereco);
-        formData.append('email', email);
-        formData.append('senha', senha);
 
-        fetch('http://localhost:8000/funcionario/', {
-            method: 'POST',
-            body: formData
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao enviar os dados');
-                }
-                return response.json();
-            })
-            .then(data => {
-                setTimeout(function () {
-                    swal("Salvo!", "O funcionario foi cadastrado com sucesso.", "success");
-                }, 2000);
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-                // Tratamento de erro, se necessário
-            });
+    const formData = new FormData();
+    formData.append('nome', nome);
+    formData.append('numero_bilhete', numeroBilhete);
+    formData.append('funcao', funcao);
+    formData.append('data_nascimento', dataNascimento);
+    formData.append('endereco', endereco);
+    formData.append('email', email);
+    formData.append('senha', senha);
 
-        limparCamposFuncionario();
-    }
-}
-
-
-function verificarCamposFuncionario() {
-    const campos = [
-        { id: 'nome' },
-        { id: 'bilhete' },
-        { id: 'funcao' },
-        { id: 'dataNascimento' },
-        { id: 'endereco' },
-        { id: 'email' },
-        { id: 'senha' }
-    ];
-
-    let formValido = true;
-
-    campos.forEach(campo => {
-        const elemento = document.getElementById(campo.id);
-        if (!elemento.value) {
-            elemento.classList.add('border-red-600');
-            document.getElementById('preencherCampos').classList.remove("hidden");
-            formValido = false;
-        } else {
-            elemento.classList.remove('border-red-600');
-            document.getElementById('preencherCampos').classList.add("hidden");
+    fetch('http://localhost:8000/funcionario/', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro ao enviar os dados');
         }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Dados enviados com sucesso:', data);
+        // Lógica adicional após o envio bem-sucedido
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+        // Tratamento de erro, se necessário
     });
 
-    return formValido;
-}
-
-function verificarCamposItem() {
-    const campos = [
-        { id: 'data' },
-        { id: 'categoria' },
-        { id: 'area' },
-        { id: 'tempo-vida' },
-        { id: 'estado' },
-        { id: 'imagem' }
-    ];
-
-    let formValido = true;
-
-    campos.forEach(campo => {
-        const elemento = document.getElementById(campo.id);
-        const valor = campo.id === 'imagem' ? elemento.files[0] : elemento.value;
-        if (!valor) {
-            elemento.classList.add('border-red-600', 'shadow-outline-red');
-            document.getElementById('preencherCampos').classList.remove("hidden");
-            formValido = false;
-        } else {
-            elemento.classList.remove('border-red-600', 'shadow-outline-red');
-            document.getElementById('preencherCampos').classList.add("hidden");
-        }
-    });
-
-    return formValido;
+    limparCamposFuncionario();
 }
 
 function carregarDadosItem() {
